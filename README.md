@@ -1,3 +1,3 @@
 # fishttp
 
-WIP: minimalist HTTP C library to make request as with `fetch` in Javascript
+WIP: minimalist HTTP C library to make requests in C as with `fetch` in Javascript
