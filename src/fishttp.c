@@ -10,7 +10,7 @@ int sendData(const char* addr, const char* msg) {
 
     struct addrinfo *info = NULL;
 
-    int errcode = getaddrinfo(addr, "8080", NULL, &info);
+    int errcode = getaddrinfo(addr, "80", NULL, &info);
     if (errcode != 0) {
         fprintf(stderr, "06\n");
         exit(1);
