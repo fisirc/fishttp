@@ -18,7 +18,7 @@
 #if FISHTTP_ENV_IS_DEV
 #   define FISHTTP_LOG(x, ...) \
         printf( \
-            FISHTTP_CYAN "%s:" FISHTTP_BLUE "%d(" FISHTTP_CYAN "%s" FISHTTP_BLUE "): " FISHTTP_RESET x, \
+            FISHTTP_CYAN "%s:" FISHTTP_BLUE "%d(" FISHTTP_CYAN "%s" FISHTTP_BLUE "): " FISHTTP_RESET x "\n", \
             __FILENAME__, \
             __LINE__, \
             __func__, \
@@ -30,8 +30,9 @@
 
 #define FISHTTP_ASSERT(x, y) \
     if (!(x)) { \
-        printf( \
-            FISHTTP_RED "%s:%d(" FISHTTP_BRIGHT_RED "%s" FISHTTP_RED "): assertion failed: " FISHTTP_RESET y, \
+        fprintf( \
+            stderr, \
+            FISHTTP_RED "%s:%d(" FISHTTP_BRIGHT_RED "%s" FISHTTP_RED "): assertion failed: " FISHTTP_RESET y "\n", \
             __FILENAME__, \
             __LINE__, \
             __func__ \
