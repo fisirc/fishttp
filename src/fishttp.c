@@ -1,8 +1,35 @@
 #include "fishttp.h"
+#include <stddef.h>
+#include <stdio.h>
 
-int sendData(const char* addr, const char* msg) {
+
+char* fishttp_buildRequest(char* url, fishttp_options opt) {
+    char* req = calloc(2000, sizeof(char));
+    size_t headers_len = 3;
+// GET /[endpoint] HTTP/1.1
+// \r\n
+// Host: [Host]
+// \r\n
+// Headers: [headers]\n[final_header]
+// \r\n
+// \r\n
+    strcat(req, opt.method);
+    strcat(req, " /");
+    strcat(req, url);
+    strcat(req, " HTTP/1.1");
+    strcat(req, "\r\n");
+    for (size_t i = 0; i < headers_len; i++) {
+        strcat(req, opt.headers[i]);
+        if (i != headers_len - 1) strcat(req, "\n");
+    }
+    strcat(req, "\r\n\r\n");
+    return req;
+    return "\0";
+}
+
+int sendData(const char* addr, char* msg) {
     // struct sockaddr_in server_addr;
-    char request_buff[2000], response_buff[2000];
+    char request_buff[2000], response_buff[4000];
 
     // Clean buffers:
     memset(request_buff, '\0', sizeof(request_buff));
@@ -60,5 +87,6 @@ int sendData(const char* addr, const char* msg) {
     // close(socket_desc);
 
     freeaddrinfo(info);
+    close(socket_fd);
     return socket_fd;
 }

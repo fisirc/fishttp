@@ -7,9 +7,12 @@
 #include <netdb.h>
 #include <unistd.h>
 
-typedef struct _fishttp_options {
-    int port; // 443 or 80
-    char* method; // GET
-} options;
+typedef struct {
+    char* method; // GET on default
+    char** headers;
+    char* body;
+} fishttp_options;
 
-int sendData(const char* addr, const char* msg);
+int sendData(const char* addr, char* msg);
+
+char* fishttp_buildRequest(char* url, fishttp_options opt);
